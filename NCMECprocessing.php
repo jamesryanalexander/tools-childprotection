@@ -13,7 +13,7 @@ New processor with pretty output - Beta
 
 ---------------------------------------------   */
 
-require_once dirname( __FILE__ ) . '/../include/multiuseFunctions.php';
+require_once dirname( __FILE__ ) . '/../core-include/multiuseFunctions.php';
 date_default_timezone_set( 'UTC' );
 
 // cast config and log variables
@@ -349,7 +349,7 @@ echo print_r( $_FILES );?></textarea>
                 </fieldset>
 			</div>
 		</div>
-			<?php include dirname( __FILE__ ) . '/../include/lcapage.php'; ?>
+			<?php include dirname( __FILE__ ) . '/../project-include/page.php'; ?>
 	</div>
 <?php
 echo '...';

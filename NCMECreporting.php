@@ -489,11 +489,11 @@
                 </form>
             </div>
         </div>
-        <?php include dirname( __FILE__ ) . '/../include/lcapage.php'; ?>
+        <?php include dirname( __FILE__ ) . '/../project-include/page.php'; ?>
     </div>
     <?php
 flush();
-require_once dirname( __FILE__ ) . '/../include/multiuseFunctions.php';
+require_once dirname( __FILE__ ) . '/../core-include/multiuseFunctions.php';
 $config = parse_ini_file( dirname( __FILE__ ) . '/../lcaToolsConfig.ini' );
 $NCMEC_URL_Production = $config['NCMEC_URL_Production'].'status';
 $NCMEC_URL_Test = $config['NCMEC_URL_Test'].'status';

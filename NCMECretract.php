@@ -12,7 +12,7 @@ NCMEC reporting form for Child Protection takedowns
 
 ---------------------------------------------   */
 
-require_once dirname( __FILE__ ) . '/../include/multiuseFunctions.php';
+require_once dirname( __FILE__ ) . '/../core-include/multiuseFunctions.php';
 date_default_timezone_set( 'UTC' );
 
 // cast config and log variables
@@ -97,7 +97,7 @@ $user = $_SERVER['PHP_AUTH_USER'];
 
 			</div>
 		</div>
-			<?php include dirname( __FILE__ ) . '/../include/lcapage.php'; ?>
+			<?php include dirname( __FILE__ ) . '/../project-include/page.php'; ?>
 	</div>
 </body>
 </html>
