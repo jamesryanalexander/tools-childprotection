@@ -1,54 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	elementFormDefault="qualified">
-    <xs:annotation>
-    	<xs:documentation>This document describes the ESP incident reporting format.</xs:documentation>
-    </xs:annotation>
-    <xs:element name="report">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xs:annotation>
+		<xs:documentation>This document describes the ESP incident reporting format.</xs:documentation>
+	</xs:annotation>
+	<xs:element name="report">
 		<xs:annotation>
-			<xs:documentation>This is the main top level tag to define an incident report</xs:documentation>
+			<xs:documentation>This is the main top level tag to define an incident report.</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element ref="incidentSummary">
 					<xs:annotation>
-						<xs:documentation>This contains general incident information</xs:documentation>
+						<xs:documentation>This contains general incident information.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element maxOccurs="unbounded" ref="internetDetails" >
+				<xs:element minOccurs="0" maxOccurs="unbounded" ref="internetDetails">
 					<xs:annotation>
-						<xs:documentation>This record summarizes the details of the incident being reported. 
-							There can be more than one for different
-							incident details, but there must be at least of these
-							for each report.</xs:documentation>
+						<xs:documentation>This record summarizes the details of the incident being reported. There can be more than one for different incident details, but there must be at least of these for each report.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element minOccurs="0" ref="lawEnforcement" >
+				<xs:element minOccurs="0" ref="lawEnforcement">
 					<xs:annotation>
-						<xs:documentation>The law enforcement contact information related to the event. This is used 
-							if the incident information has already been reported to law enforcement or if the 
-							request originated from law enforcement.
-						</xs:documentation>
+						<xs:documentation>The law enforcement contact information related to the event. This is used if the incident information has already been reported to law enforcement or if the request originated from law enforcement.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element ref="reporter" >
+				<xs:element ref="reporter">
 					<xs:annotation>
-						<xs:documentation>This is information related to the person or organization reporting the incident</xs:documentation>
+						<xs:documentation>This is information related to the person or organization reporting the incident.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element minOccurs="0" maxOccurs="1" ref="personOrUserReported" >
+				<xs:element minOccurs="0" maxOccurs="1" ref="personOrUserReported">
 					<xs:annotation>
-						<xs:documentation>There can be 0 or 1 reported user or person involved in the incident</xs:documentation>
+						<xs:documentation>There can be 0 or 1 reported user or person involved in the incident.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element minOccurs="0" maxOccurs="unbounded" ref="victim" >
+				<xs:element minOccurs="0" maxOccurs="unbounded" ref="victim">
 					<xs:annotation>
-						<xs:documentation>There can be 0 or more victim records for each incident</xs:documentation>
+						<xs:documentation>There can be 0 or more victim records for each incident.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element minOccurs="0" ref="additionalInfo">
 					<xs:annotation>
-						<xs:documentation>Any additional notes on this incident not covered by any other section</xs:documentation>
+						<xs:documentation>Any additional notes on this incident not covered by any other section.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 			</xs:sequence>
@@ -59,33 +52,22 @@
 			<xs:sequence>
 				<xs:element name="incidentType" type="incidentType">
 					<xs:annotation>
-						<xs:documentation>
-							This field describes the type of incident being reported. It&apos;s
-							an enumerated value with certain predefined values.
-						</xs:documentation>
+						<xs:documentation>This field describes the type of incident being reported.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="escalateToHighPriority" minOccurs="0" type="xs:string">
 					<xs:annotation>
-						<xs:documentation>
-							Company indicated a higher level of urgency (immediate risk to child) and the
-							reason for this escalation
-						</xs:documentation>
+						<xs:documentation>Company indicated a higher level of urgency (immediate risk to child) and the reason for this escalation. Only enter text if you want to escalate the report.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="incidentDateTime" type="xs:dateTime">
 					<xs:annotation>
-						<xs:documentation>
-							This required field will be populated with the date/time/time zone of the reported incident
-						</xs:documentation>
+						<xs:documentation>This required field will be populated with the date/time/time zone of the reported incident.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element minOccurs="0" name="incidentDateTimeDescription" type="xs:string">
 					<xs:annotation>
-						<xs:documentation>
-							This is a text field that allows you to enter any additional information 
-							related to the incidentDateTime.
-						</xs:documentation>
+						<xs:documentation>This is a text field that allows you to enter any additional information related to the incidentDateTime.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 			</xs:sequence>
@@ -93,62 +75,48 @@
 	</xs:element>
 	<xs:element name="internetDetails">
 		<xs:annotation>
-			<xs:documentation>
-				These records summarize a specific instance to be reported. There can be
-				several different types to reflect
-				different instances. Sometimes, an incident report can contain many
-				different, but related events such as a URL,
-				email or chat. There can be 0 or more of the following subtypes.
-			</xs:documentation>
+			<xs:documentation>This record summarizes the details of the incident being reported. There can be one or more for different incident details. Each record must have one of the following subtypes.</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
 			<xs:choice>
-				<xs:element ref="webPageIncident" >
+				<xs:element ref="webPageIncident">
 					<xs:annotation>
-						<xs:documentation>The incident occurred on a web page. </xs:documentation>
+						<xs:documentation>The incident occurred on a web page.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element ref="emailIncident" >
+				<xs:element ref="emailIncident">
 					<xs:annotation>
-						<xs:documentation>The incident occurred over Email. </xs:documentation>
+						<xs:documentation>The incident occurred over Email.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element ref="newsgroupIncident" >
+				<xs:element ref="newsgroupIncident">
 					<xs:annotation>
 						<xs:documentation>The incident occurred in a newsgroup.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element ref="chatImIncident" >
+				<xs:element ref="chatImIncident">
 					<xs:annotation>
-						<xs:documentation>The incident occurred over IM or during a chat session</xs:documentation>
+						<xs:documentation>The incident occurred over IM or during a chat session.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element ref="onlineGamingIncident" >
+				<xs:element ref="onlineGamingIncident">
 					<xs:annotation>
 						<xs:documentation>The incident occurred during an online game.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element ref="cellPhoneIncident" >
+				<xs:element ref="cellPhoneIncident">
 					<xs:annotation>
-						<xs:documentation>This category is used when the primary method of communication between 
-							the child and/or reported person or user is through a cell phone. This can include phone conversations, 
-							text messages, or images sent through the phone.
-						</xs:documentation>
+						<xs:documentation>This category is used when the primary method of communication between the child and/or reported person or user is through a cell phone. This can include phone conversations, text messages, or images sent through the phone.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element ref="nonInternetIncident" >
+				<xs:element ref="nonInternetIncident">
 					<xs:annotation>
-						<xs:documentation>This category of the incident does not involve an online or computer component 
-						or a cell phone (for example, face-to-face contact or potentially illegal hard copy or
-						printed materials).
-						</xs:documentation>
+						<xs:documentation>This category of the incident does not involve an online or computer component or a cell phone (e.g., face-to-face contact or potentially illegal hard copy or printed materials).</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element ref="peer2peerIncident" >
+				<xs:element ref="peer2peerIncident">
 					<xs:annotation>
-						<xs:documentation>The incident occurred via a Peer to Peer (also known as P2P) decentralized network that 
-						allows users to share files through a direct connection.
-						</xs:documentation>
+						<xs:documentation>The incident occurred via a Peer to Peer (also known as P2P) decentralized network that allows users to share files through a direct connection.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 			</xs:choice>
@@ -160,43 +128,38 @@
 		</xs:annotation>
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element name="url" maxOccurs="unbounded" type="xs:anyURI">
+				<xs:element name="url" minOccurs="0" maxOccurs="unbounded" type="xs:anyURI">
 					<xs:annotation>
-						<xs:documentation>
-							This is the actual URL where the reported incident occurred. There
-							can be as many of these as needed.
-						</xs:documentation>
+						<xs:documentation>This is the actual URL where the reported incident occurred. There can be as many of these as needed.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element ref="additionalInfo" minOccurs="0">
 					<xs:annotation>
-						<xs:documentation>
-							This is a text field that allows you to enter
-							any additional information related to the web page event.
-						</xs:documentation>
+						<xs:documentation>This is a text field that allows you to enter any additional information related to the web page event.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 			</xs:sequence>
 			<xs:attribute default="false" name="thirdPartyHostedContent" type="xs:boolean">
 				<xs:annotation>
-					<xs:documentation>Reported URL is hosted on another company&apos;s server. The 
-					reporting company has no further information on this incident and is providing 
-					it to NCMEC for informational purposes.</xs:documentation>
+					<xs:documentation>True if the reported URL is hosted on another company&apos;s server. The reporting company has no further information on this incident and is providing it to NCMEC for informational purposes.</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
 		</xs:complexType>
 	</xs:element>
 	<xs:element name="emailIncident">
+		<xs:annotation>
+			<xs:documentation>The incident occurred over email.</xs:documentation>
+		</xs:annotation>
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element ref="content" minOccurs="0">
 					<xs:annotation>
-						<xs:documentation>The headers, subject and content of the communication</xs:documentation>
+						<xs:documentation>The headers, subject, and content of the communication.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element ref="additionalInfo" minOccurs="0">
 					<xs:annotation>
-						<xs:documentation>Any additional notes to add to the email event</xs:documentation>
+						<xs:documentation>Any additional notes to add to the email event.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 			</xs:sequence>
@@ -204,21 +167,21 @@
 	</xs:element>
 	<xs:element name="newsgroupIncident">
 		<xs:complexType>
-            <xs:annotation>
-            	<xs:documentation>The incident occurred in a newsgroup.</xs:documentation>
-            </xs:annotation>
-            <xs:sequence>
-				<xs:element name="name" minOccurs="0" type="xs:string" >
+			<xs:annotation>
+				<xs:documentation>The incident occurred in a newsgroup.</xs:documentation>
+			</xs:annotation>
+			<xs:sequence>
+				<xs:element name="name" minOccurs="0" type="xs:string">
 					<xs:annotation>
-						<xs:documentation>The newsgroup name</xs:documentation>
+						<xs:documentation>The newsgroup name.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element ref="content" minOccurs="0" >
+				<xs:element ref="content" minOccurs="0">
 					<xs:annotation>
 						<xs:documentation>The content of the newsgroup posting including any headers, subject.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element ref="additionalInfo" minOccurs="0" >
+				<xs:element ref="additionalInfo" minOccurs="0">
 					<xs:annotation>
 						<xs:documentation>Any additional notes to add to the newsgroup event.</xs:documentation>
 					</xs:annotation>
@@ -228,32 +191,28 @@
 	</xs:element>
 	<xs:element name="chatImIncident">
 		<xs:annotation>
-			<xs:documentation>
-				The incident occurred over instant messenger or during a chat session
-			</xs:documentation>
+			<xs:documentation>The incident occurred over IM or during a chat session.</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element name="chatClient" minOccurs="0" type="xs:string">
 					<xs:annotation>
-						<xs:documentation>The chat or instant messanger program used</xs:documentation>
+						<xs:documentation>The chat or instant messanger program used.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="chatRoomName" minOccurs="0" type="xs:string">
 					<xs:annotation>
-						<xs:documentation>The name of the chat room</xs:documentation>
+						<xs:documentation>The name of the chat room.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element ref="content" minOccurs="0">
 					<xs:annotation>
-						<xs:documentation>The content of the chat, any chat logs</xs:documentation>
+						<xs:documentation>The content of the chat, any chat logs.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element ref="additionalInfo" minOccurs="0">
 					<xs:annotation>
-						<xs:documentation>
-							Any additional information related to the chat/instant messaging incident
-						</xs:documentation>
+						<xs:documentation>Any additional information related to the chat/instant messaging incident.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 			</xs:sequence>
@@ -275,14 +234,14 @@
 						<xs:documentation>The name of the gaming console if one was used.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element ref="content" minOccurs="0" >
+				<xs:element ref="content" minOccurs="0">
 					<xs:annotation>
-						<xs:documentation>The content of the message/chat that occurred during the game</xs:documentation>
+						<xs:documentation>The content of the message/chat that occurred during the game.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element ref="additionalInfo" minOccurs="0" >
+				<xs:element ref="additionalInfo" minOccurs="0">
 					<xs:annotation>
-						<xs:documentation>Any additional information about the online gaming incident</xs:documentation>
+						<xs:documentation>Any additional information about the online gaming incident.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 			</xs:sequence>
@@ -290,33 +249,26 @@
 	</xs:element>
 	<xs:element name="cellPhoneIncident">
 		<xs:annotation>
-			<xs:documentation>
-				This incident occurred via cell phone, SMS technology or mobile app. This can include phone
-				conversations, text messages, or images sent through the phone.
-        	</xs:documentation>
+			<xs:documentation>This category is used when the primary method of communication between the child and/or reported person or user is through a cell phone. This can include phone conversations, text messages, or images sent through the phone.</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element name="phoneNumber" minOccurs="0" type="xs:string">
 					<xs:annotation>
-						<xs:documentation>
-							The cell phone number associated with the incident
-						</xs:documentation>
+						<xs:documentation>The cell phone number associated with the incident.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="latitude" minOccurs="0" type="latlong">
 					<xs:annotation>
-						<xs:documentation>
-							Please provide the latitude associated with the incident.
-						</xs:documentation>
+						<xs:documentation>The latitude associated with the incident.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="longitude" minOccurs="0" type="latlong">
 					<xs:annotation>
-						<xs:documentation>Please provide the longitude associated with the incident.</xs:documentation>
+						<xs:documentation>The longitude associated with the incident.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element ref="additionalInfo" minOccurs="0" >
+				<xs:element ref="additionalInfo" minOccurs="0">
 					<xs:annotation>
 						<xs:documentation>Any additional information about the cell phone incident.</xs:documentation>
 					</xs:annotation>
@@ -326,26 +278,21 @@
 	</xs:element>
 	<xs:element name="nonInternetIncident">
 		<xs:annotation>
-			<xs:documentation>
-				This category should be used if the reported incident did not occur on the World Wide 
-				Web, email, newsgroups, chat/instant message, online gaming, cell phone, SMS or peer to peer.
-        	</xs:documentation>
+			<xs:documentation>This category of the incident does not involve an online or computer component or a cell phone (e.g., face-to-face contact or potentially illegal hard copy or printed materials).</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element name="locationName" minOccurs="1" type="xs:string" >
+				<xs:element name="locationName" minOccurs="0" type="xs:string">
 					<xs:annotation>
-						<xs:documentation>
-							The location associated with the incident
-						</xs:documentation>
+						<xs:documentation>The location associated with the incident.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="incidentAddress" minOccurs="0" maxOccurs="unbounded" type="address" >
+				<xs:element name="incidentAddress" minOccurs="0" maxOccurs="unbounded" type="address">
 					<xs:annotation>
-						<xs:documentation>Incident&apos;s address</xs:documentation>
+						<xs:documentation>Incident&apos;s address.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element ref="additionalInfo">
+				<xs:element minOccurs="0" ref="additionalInfo">
 					<xs:annotation>
 						<xs:documentation>Please describe in detail the incident being reported.</xs:documentation>
 					</xs:annotation>
@@ -355,31 +302,26 @@
 	</xs:element>
 	<xs:element name="peer2peerIncident">
 		<xs:annotation>
-			<xs:documentation>
-				The incident occurred via a Peer to Peer (also known as P2P) decentralized network that allows 
-				users to share files through a direct connection.
-        	</xs:documentation>
+			<xs:documentation>The incident occurred via a Peer to Peer (also known as P2P) decentralized network that allows users to share files through a direct connection.</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element name="client" minOccurs="1" type="xs:string" >
+				<xs:element name="client" minOccurs="0" type="xs:string">
 					<xs:annotation>
-						<xs:documentation>
-							The Peer to Peer Client used (i.e., Phex, Emule)
-						</xs:documentation>
+						<xs:documentation>The Peer to Peer Client used (e.g., Phex, Emule).</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="ipCaptureEvent" type="ipCaptureEvent" minOccurs="0" maxOccurs="unbounded" >
+				<xs:element name="ipCaptureEvent" type="ipCaptureEvent" minOccurs="0" maxOccurs="unbounded">
 					<xs:annotation>
-						<xs:documentation>An IP address used by the person or user reported</xs:documentation>
+						<xs:documentation>An IP address used by the person or user reported.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="fileNames" minOccurs="0" type="xs:string" >
+				<xs:element name="fileNames" minOccurs="0" type="xs:string">
 					<xs:annotation>
-						<xs:documentation>The name of file/s</xs:documentation>
+						<xs:documentation>The name of file(s).</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element ref="additionalInfo" minOccurs="0" >
+				<xs:element ref="additionalInfo" minOccurs="0">
 					<xs:annotation>
 						<xs:documentation>Any additional information about the cell phone incident.</xs:documentation>
 					</xs:annotation>
@@ -388,42 +330,39 @@
 		</xs:complexType>
 	</xs:element>
 	<xs:element name="lawEnforcement">
-        <xs:annotation>
-        	<xs:documentation>The law enforcement contact information related to the event. This is used 
-					if the incident information has already been reported to law enforcement or if the 
-					request originated from law enforcement.
-        	</xs:documentation>
-        </xs:annotation>
+		<xs:annotation>
+			<xs:documentation>The law enforcement contact information related to the event. This is used if the incident information has already been reported to law enforcement or if the request originated from law enforcement.</xs:documentation>
+		</xs:annotation>
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element name="agencyName" type="xs:string" >
+				<xs:element name="agencyName" type="xs:string">
 					<xs:annotation>
-						<xs:documentation>The law enforcement agency name involved</xs:documentation>
+						<xs:documentation>The law enforcement agency name involved.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="caseNumber" minOccurs="0" type="xs:NMTOKEN" >
+				<xs:element name="caseNumber" minOccurs="0" type="xs:NMTOKEN">
 					<xs:annotation>
-						<xs:documentation>The case number if known</xs:documentation>
+						<xs:documentation>The case number if known.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="officerContact" minOccurs="0" type="person" >
+				<xs:element name="officerContact" minOccurs="0" type="person">
 					<xs:annotation>
 						<xs:documentation>The contact information for the investigator or officer on the case.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="reportedToLe" minOccurs="0" type="xs:boolean">
 					<xs:annotation>
-						<xs:documentation>Set this to true if the incident was reported to law enforcement by the company</xs:documentation>
+						<xs:documentation>Set this to true if the incident was reported to law enforcement by the company.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="servedLegalProcessDomestic" minOccurs="0" type="xs:boolean">
 					<xs:annotation>
-						<xs:documentation>Set this to true if domestic law enforcement has served legal process about this person/user or reported incident</xs:documentation>
+						<xs:documentation>Set this to true if domestic law enforcement has served legal process about this person/user or reported incident.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="servedLegalProcessInternational" minOccurs="0">
 					<xs:annotation>
-						<xs:documentation>Set this to true if international law enforcement has served legal process about this person/user or reported incident</xs:documentation>
+						<xs:documentation>Set this to true if international law enforcement has served legal process about this person/user or reported incident.</xs:documentation>
 					</xs:annotation>
 					<xs:complexType>
 						<xs:simpleContent>
@@ -441,40 +380,43 @@
 		</xs:complexType>
 	</xs:element>
 	<xs:element name="reporter">
+		<xs:annotation>
+			<xs:documentation>This is information related to the person or company reporting the incident.</xs:documentation>
+		</xs:annotation>
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element name="reportingPerson" type="person" >
+				<xs:element name="reportingPerson" type="person">
 					<xs:annotation>
-						<xs:documentation>Details of the person reporting the information and the company&apos;s address</xs:documentation>
+						<xs:documentation>Details of the person reporting the information and the company&apos;s address.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element minOccurs="0" name="contactPerson" type="person" >
+				<xs:element minOccurs="0" name="contactPerson" type="person">
 					<xs:annotation>
-						<xs:documentation>
-							Use this field if the company prefers law enforcement to contact another individual
-							other than the person who submitted the report.
-						</xs:documentation>
+						<xs:documentation>Use this field if a person other than the person submitting the report should be contacted by law enforcement regarding the report.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="companyTemplate" minOccurs="0" type="xs:string">
 					<xs:annotation>
-						<xs:documentation>This open-text field allows a company to include language (not specific to the reported incident) 
-						that they want included in every CyberTipline report. For instance, basic company information, how legal process 
-						should be served, length of data retention, 24-hour emergency phone numbers, etc.</xs:documentation>
+						<xs:documentation>This open-text field allows a company to include language (not specific to the reported incident) that they want included in every CyberTipline report. For instance, basic company information, how legal process should be served, length of data retention, 24-hour emergency phone numbers, etc..</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="termsOfService" minOccurs="0" type="xs:string">
+					<xs:annotation>
+						<xs:documentation>Include Terms of Service (TOS) relevant to the incident being reported.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="legalURL" minOccurs="0" type="xs:anyURI">
 					<xs:annotation>
-						<xs:documentation>Company can include a URL if they wish to direct law enforcement to a web page for further information.</xs:documentation>
+						<xs:documentation>Company can include a URL if they wish to direct attention to a web page for further information.</xs:documentation>
 					</xs:annotation>
-				</xs:element> 
+				</xs:element>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
 	<xs:element name="personOrUserReported">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element name="personOrUserReportedPerson" minOccurs="0" type="person" >
+				<xs:element name="personOrUserReportedPerson" minOccurs="0" type="person">
 					<xs:annotation>
 						<xs:documentation>The person information about the reported person or user in the incident.</xs:documentation>
 					</xs:annotation>
@@ -484,44 +426,47 @@
 						<xs:documentation>The description for the vehicle of the reported person.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="espIdentifier" minOccurs="0" type="xs:string" >
+				<xs:element name="espIdentifier" minOccurs="0" type="xs:string">
 					<xs:annotation>
-						<xs:documentation>The unique ID of the reported person or user in the ESP&apos;s system (i.e., friend ID)</xs:documentation>
+						<xs:documentation>The unique ID of the reported person or user in the ESP&apos;s system (e.g., friend ID).</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="screenName" minOccurs="0" type="xs:string" >
+				<xs:element name="screenName" minOccurs="0" type="xs:string">
 					<xs:annotation>
-						<xs:documentation>The screen name of the reported person or user</xs:documentation>
+						<xs:documentation>The screen name of the reported person or user.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="profileUrl" minOccurs="0" maxOccurs="unbounded" type="xs:anyURI" >
+				<xs:element name="profileUrl" minOccurs="0" maxOccurs="unbounded" type="xs:anyURI">
 					<xs:annotation>
-						<xs:documentation>The different identifying URLs for this reported person or user</xs:documentation>
+						<xs:documentation>The different identifying URLs for this reported person or user.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="ipCaptureEvent" type="ipCaptureEvent" minOccurs="0" maxOccurs="unbounded" >
+				<xs:element name="ipCaptureEvent" type="ipCaptureEvent" minOccurs="0" maxOccurs="unbounded">
 					<xs:annotation>
-						<xs:documentation>An originating IP address used by the reported person or user and when it was used </xs:documentation>
+						<xs:documentation>An originating IP address used by the reported person or user and when it was used.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="deviceId" type="deviceId" minOccurs="0" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>An ID for a device used by the reported person or user and, optionally, when it was used.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="thirdPartyUserReported" minOccurs="0" type="xs:boolean">
 					<xs:annotation>
-						<xs:documentation>Reported person or user is using another company&apos;s service. The reporting company has no further 
-						information about this person or user.</xs:documentation>
+						<xs:documentation>Reported person or user is using another company&apos;s service. The reporting company has no further information about this person or user.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="priorCTReports" minOccurs="0" maxOccurs="unbounded" type="xs:int">
+				<xs:element name="priorCTReports" minOccurs="0" maxOccurs="unbounded" type="xs:long">
 					<xs:annotation>
-						<xs:documentation>List report ID numbers for any prior CyberTipLine reports on this reported person or user</xs:documentation>
+						<xs:documentation>List report ID numbers for any prior CyberTipline reports on this reported person or user.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="groupIdentifier" minOccurs="0" type="xs:string">
 					<xs:annotation>
-						<xs:documentation>The ESP believes the reported person or user is engaged in an organized online group related to child sexual exploitation.
-						This open text field is used  to provide unique group identifiers (i.e., group name, group ID, etc.). </xs:documentation>
+						<xs:documentation>The ESP believes the reported person or user is engaged in an organized online group related to child sexual exploitation. This open text field is used to provide unique group identifiers (e.g., group name, group ID, etc.).</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element ref="additionalInfo" minOccurs="0" >
+				<xs:element ref="additionalInfo" minOccurs="0">
 					<xs:annotation>
 						<xs:documentation>Any additional notes on this reported person or user not covered by any other section</xs:documentation>
 					</xs:annotation>
@@ -530,168 +475,199 @@
 		</xs:complexType>
 	</xs:element>
 	<xs:element name="victim">
-        <xs:annotation>
-        	<xs:documentation>There can be 0 or more victim records for each incident</xs:documentation>
-        </xs:annotation>
-        <xs:complexType>
+		<xs:annotation>
+			<xs:documentation>There can be 0 or more victim records for each incident.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
 			<xs:sequence>
-				<xs:element name="victimPerson" type="person" >
+				<xs:element name="victimPerson" type="person">
 					<xs:annotation>
 						<xs:documentation>The victim&apos;s personal details such as name, address, phone numbers.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="espIdentifier" minOccurs="0" type="xs:string" >
+				<xs:element name="espIdentifier" minOccurs="0" type="xs:string">
 					<xs:annotation>
-						<xs:documentation>The unique ID of the victim in the ESP&apos;s system (i.e., friend ID)</xs:documentation>
+						<xs:documentation>The unique ID of the victim in the ESP&apos;s system (e.g., friend ID).</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="screenName" minOccurs="0" type="xs:string" >
+				<xs:element name="screenName" minOccurs="0" type="xs:string">
 					<xs:annotation>
-						<xs:documentation>The screen name of the victim</xs:documentation>
+						<xs:documentation>The screen name of the victim.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="profileUrl" minOccurs="0" maxOccurs="unbounded" type="xs:anyURI" >
+				<xs:element name="profileUrl" minOccurs="0" maxOccurs="unbounded" type="xs:anyURI">
 					<xs:annotation>
-						<xs:documentation>The identifying URL(s) for the child victim</xs:documentation>
+						<xs:documentation>The identifying URL(s) for the child victim.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="ipCaptureEvent" type="ipCaptureEvent" minOccurs="0" maxOccurs="unbounded" >
+				<xs:element name="ipCaptureEvent" type="ipCaptureEvent" minOccurs="0" maxOccurs="unbounded">
 					<xs:annotation>
-						<xs:documentation>An originating IP address used by the victim and when it was used</xs:documentation>
+						<xs:documentation>An originating IP address used by the victim and when it was used.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="deviceId" type="deviceId" minOccurs="0" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>An ID for a device used by the victim and, optionally, when it was used.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="schoolName" minOccurs="0" type="xs:string">
 					<xs:annotation>
-						<xs:documentation>Child victim&apos;s school name</xs:documentation>
+						<xs:documentation>Child victim&apos;s school name.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="priorCTReports" minOccurs="0" maxOccurs="unbounded" type="xs:int">
+				<xs:element name="priorCTReports" minOccurs="0" maxOccurs="unbounded" type="xs:long">
 					<xs:annotation>
-						<xs:documentation>List report ID numbers for any prior CyberTipLine reports on this child victim</xs:documentation>
+						<xs:documentation>List report ID numbers for any prior CyberTipline reports on this child victim.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="additionalInfo" minOccurs="0" type="xs:string">
 					<xs:annotation>
-						<xs:documentation>Any additional notes on this child victim</xs:documentation>
+						<xs:documentation>Any additional notes on this child victim.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
-	<xs:element name="additionalInfo" type="xs:string" >
+	<xs:element name="additionalInfo" type="xs:string">
 		<xs:annotation>
-			<xs:documentation>Any additional notes on this incident not covered by any other section</xs:documentation>
+			<xs:documentation>Any additional notes on this incident not covered by any other section.</xs:documentation>
 		</xs:annotation>
 	</xs:element>
-	<xs:element name="content" type="xs:string" >
+	<xs:element name="content" type="xs:string">
 		<xs:annotation>
-			<xs:documentation>Text content of an internet incident such as email headers </xs:documentation>
+			<xs:documentation>Text content of an internet incident such as email headers.</xs:documentation>
 		</xs:annotation>
 	</xs:element>
-
 	<!-- Complex or reused data types -->
 	<xs:complexType name="ipCaptureEvent">
-        <xs:annotation>
-        	<xs:documentation>This represents the origination IP address of an action and when it occurred. </xs:documentation>
-        </xs:annotation>
-        <xs:sequence>
-			<xs:element name="ipAddress" type="xs:string" >
+		<xs:annotation>
+			<xs:documentation>This represents the origination IP address of an action and when it occurred.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ipAddress" type="xs:string">
 				<xs:annotation>
-					<xs:documentation>The IP address from which the incident occurred</xs:documentation>
+					<xs:documentation>The IP address from which the incident occurred.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="eventName" type="ipCaptureType" >
+			<xs:element minOccurs="0" name="eventName" type="ipCaptureType">
 				<xs:annotation>
-					<xs:documentation>Type of IP Address reported, ex. Login, Registration, Upload etc.</xs:documentation>
+					<xs:documentation>Type of IP Address reported, e.g., Login, Registration, Upload, etc.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="dateTime" minOccurs="0" type="xs:dateTime" >
+			<xs:element minOccurs="0" name="dateTime" type="xs:dateTime">
 				<xs:annotation>
-					<xs:documentation>The time the incident occurred and the IP address was recorded</xs:documentation>
+					<xs:documentation>The time the incident occurred and the IP address was recorded.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="possibleProxy" minOccurs="0" type="xs:boolean">
+			<xs:element minOccurs="0" name="possibleProxy" type="xs:boolean">
 				<xs:annotation>
 					<xs:documentation>If the ESP has reason to believe this IP address is a proxy, please indicate this here.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="deviceId">
+		<xs:annotation>
+			<xs:documentation>This represents the capture of a device ID.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="idType" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>The type of device ID captured, e.g., IMEI, ICCID, SSID, etc..</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="idValue" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>The value of the ID captured.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="eventName" minOccurs="0" type="ipCaptureType">
+				<xs:annotation>
+					<xs:documentation>Event during which the company recorded the device ID capture reported, e.g., Login, Registration, Upload, etc..</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="dateTime" minOccurs="0" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>The time the incident occurred and the device ID was recorded.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="address">
 		<xs:sequence>
-			<xs:element minOccurs="0" maxOccurs="1" name="address" type="xs:string" >
+			<xs:element minOccurs="0" maxOccurs="1" name="address" type="xs:string">
 				<xs:annotation>
-					<xs:documentation>Street Address</xs:documentation>
+					<xs:documentation>Street Address.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element minOccurs="0" name="city" type="xs:string" >
+			<xs:element minOccurs="0" name="city" type="xs:string">
 				<xs:annotation>
-					<xs:documentation>City</xs:documentation>
+					<xs:documentation>City.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element minOccurs="0" name="zipCode" type="xs:string" >
+			<xs:element minOccurs="0" name="zipCode" type="xs:string">
 				<xs:annotation>
-					<xs:documentation>Zip or postal code</xs:documentation>
+					<xs:documentation>Zip or postal code.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element minOccurs="0" name="state" type="state" >
+			<xs:element minOccurs="0" name="state" type="state">
 				<xs:annotation>
-					<xs:documentation>US State or territory</xs:documentation>
+					<xs:documentation>US State or territory.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element minOccurs="0" name="nonUsaState" type="xs:string" >
+			<xs:element minOccurs="0" name="nonUsaState" type="xs:string">
 				<xs:annotation>
 					<xs:documentation>If not in the United States, the state or province.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element minOccurs="0" name="country" type="country" >
+			<xs:element minOccurs="0" name="country" type="country">
 				<xs:annotation>
-					<xs:documentation>Country name or two letter country code</xs:documentation>
+					<xs:documentation>Country name or two letter country code.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
 		<xs:attribute name="type" type="addressType">
 			<xs:annotation>
-				<xs:documentation>The type of address</xs:documentation>
+				<xs:documentation>The type of address.</xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
 	</xs:complexType>
 	<xs:complexType name="person">
-        <xs:annotation>
-        	<xs:documentation>A person record. Can be used to represent an officer, a reported person or user, victim or reporting person.</xs:documentation>
-        </xs:annotation>
-        <xs:sequence>
-			<xs:element name="firstName" minOccurs="0" type="xs:string" >
+		<xs:annotation>
+			<xs:documentation>A person record. Can be used to represent an officer, a reported person or user, victim or reporting person.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="firstName" minOccurs="0" type="xs:string">
 				<xs:annotation>
-					<xs:documentation>Person&apos;s first name</xs:documentation>
+					<xs:documentation>Person&apos;s first name.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="lastName" minOccurs="0" type="xs:string" >
+			<xs:element name="lastName" minOccurs="0" type="xs:string">
 				<xs:annotation>
-					<xs:documentation>Person&apos;s last name</xs:documentation>
+					<xs:documentation>Person&apos;s last name.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="phone" minOccurs="0" maxOccurs="1" type="phone" >
+			<xs:element name="phone" minOccurs="0" maxOccurs="1" type="phone">
 				<xs:annotation>
-					<xs:documentation>List of telephone numbers</xs:documentation>
+					<xs:documentation>Phone number and type.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="email" minOccurs="0" type="email" >
+			<xs:element name="email" minOccurs="0" type="email">
 				<xs:annotation>
-					<xs:documentation>contact email address</xs:documentation>
+					<xs:documentation>Contact email address (type and if verified).</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="address" minOccurs="0" maxOccurs="unbounded" type="address" >
+			<xs:element name="address" minOccurs="0" maxOccurs="unbounded" type="address">
 				<xs:annotation>
-					<xs:documentation>Person&apos;s address</xs:documentation>
+					<xs:documentation>Person&apos;s address.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="age" minOccurs="0" type="xs:int" >
+			<xs:element name="age" minOccurs="0" type="xs:int">
 				<xs:annotation>
-					<xs:documentation>Person&apos;s age</xs:documentation>
+					<xs:documentation>Person&apos;s age.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="dateOfBirth" minOccurs="0" type="xs:date" >
+			<xs:element name="dateOfBirth" minOccurs="0" type="xs:date">
 				<xs:annotation>
 					<xs:documentation>Person&apos;s date of birth.</xs:documentation>
 				</xs:annotation>
@@ -699,99 +675,74 @@
 		</xs:sequence>
 	</xs:complexType>
 	<xs:simpleType name="latlong">
-        <xs:annotation>
-        	<xs:documentation>The latitude or longitude is specified as a decimal number. 
-        		Plus values represent north and east, negative values represents south and west.
-        	</xs:documentation>
-        </xs:annotation>
-        <xs:restriction base="xs:double"></xs:restriction>
+		<xs:annotation>
+			<xs:documentation>The latitude or longitude is specified as a decimal number. Plus values represent north and east, negative values represents south and west.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:double"/>
 	</xs:simpleType>
 	<xs:complexType name="email">
 		<xs:annotation>
-			<xs:documentation>
-					Emails must be well formed and the regular expression is defined by "emailType".
-					There is an optional attribute for "verified" if the email has been verified by the ESP. 
-				</xs:documentation>
-   		</xs:annotation>
+			<xs:documentation>Emails must be well formed and the regular expression is defined by "emailType". There is an optional attribute for "verified" if the email has been verified by the ESP.</xs:documentation>
+		</xs:annotation>
 		<xs:simpleContent>
 			<xs:extension base="emailType">
-				<xs:attribute name="verified" type="xs:boolean"/>
+				<xs:attribute name="verified" type="xs:boolean" />
 			</xs:extension>
 		</xs:simpleContent>
 	</xs:complexType>
 	<xs:simpleType name="emailType">
-	    <xs:restriction base="xs:string">
- 			<xs:pattern
-				value="[A-Za-z0-9_]+([-+.'][A-Za-z0-9_]+)*@[A-Za-z0-9_]+([-.][A-Za-z0-9_]+)*\.[A-Za-z0-9_]+([-.][A-Za-z0-9_]+)*">
-			</xs:pattern>
-    	</xs:restriction>
+		<xs:restriction base="xs:string"/>
 	</xs:simpleType>
-
 	<xs:complexType name="phone">
-        <xs:annotation>
-        	<xs:documentation>The complex type phone contains the phone number and 
-        		if available, the phone type.
-        	</xs:documentation>
-        </xs:annotation>
-        <xs:simpleContent>
+		<xs:annotation>
+			<xs:documentation>The complex type phone contains the phone number and if available, the phone type.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
 			<xs:extension base="xs:string">
-				<xs:attribute name="type" type="phoneType"/>
+				<xs:attribute name="type" type="phoneType" />
 			</xs:extension>
 		</xs:simpleContent>
 	</xs:complexType>
-
-	<!-- The items listed below are all the enumerated values for the data above
-		They include:
-			phone type
-			profile url type
-			incident type
-			countries
-			states
-	 -->
+	<!-- The items listed below are all the enumerated values for the data above They include: phone type profile url type incident type countries states -->
 	<xs:simpleType name="phoneType">
-	    <xs:restriction base="xs:string">
+		<xs:restriction base="xs:string">
 			<xs:enumeration value="Mobile" />
 			<xs:enumeration value="Home" />
 			<xs:enumeration value="Business" />
 			<xs:enumeration value="Fax" />
 			<xs:enumeration value="Internet" />
-    	</xs:restriction>
+		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="addressType">
 		<xs:restriction base="xs:string">
-			<xs:enumeration value="Home"/>
-			<xs:enumeration value="Business"/>
-			<xs:enumeration value="Billing"/>
-			<xs:enumeration value="Shipping"/>
-			<xs:enumeration value="Technical"/>
+			<xs:enumeration value="Home" />
+			<xs:enumeration value="Business" />
+			<xs:enumeration value="Billing" />
+			<xs:enumeration value="Shipping" />
+			<xs:enumeration value="Technical" />
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="ipCaptureType">
 		<xs:annotation>
-			<xs:documentation>This defines the type of URL. Types include login, registration, 
-				etc. The available options are enumerated in the schema.
-			</xs:documentation>
+			<xs:documentation>This defines the type of URL. Types include login, registration, etc. The available options are enumerated in the schema.</xs:documentation>
 		</xs:annotation>
-	    <xs:restriction base="xs:string">
+		<xs:restriction base="xs:string">
 			<xs:enumeration value="Login" />
 			<xs:enumeration value="Registration" />
+			<xs:enumeration value="Purchase" />
 			<xs:enumeration value="Upload" />
-			<xs:enumeration value="Other"/>
+			<xs:enumeration value="Other" />
 			<xs:enumeration value="Unknown" />
-    	</xs:restriction>
+		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="incidentType">
-        <xs:annotation>
-        	<xs:documentation>This is an enumeration of all supported incident types. Originally, 
-        		we only supported child pornography, but we have expanded to support child 
-        		prostitution, child sex tourism, sexual molestation, misleading 
-				domain names, misleading worlds or images, online enticement, or unsolicited 
-				obscene material to a child.
-			</xs:documentation>
-        </xs:annotation>
-        <xs:restriction base="xs:string">
+		<xs:annotation>
+			<xs:documentation>This is an enumeration of all supported incident types. Originally, we only supported child pornography, but we have expanded to support child sex trafficking, child sex tourism, sexual molestation, misleading domain names, misleading worlds or images, online enticement, or unsolicited obscene material to a child.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
 			<xs:enumeration value="Child Pornography (possession, manufacture, and distribution)" />
 			<xs:enumeration value="Child Prostitution" />
+			<xs:enumeration value="Child Sex Trafficking" />
 			<xs:enumeration value="Child Sex Tourism" />
 			<xs:enumeration value="Child Sexual Molestation (not by family member)" />
 			<xs:enumeration value="Misleading Domain Name" />
@@ -800,12 +751,11 @@
 			<xs:enumeration value="Unsolicited Obscene Material Sent to a Child" />
 		</xs:restriction>
 	</xs:simpleType>
-
 	<xs:simpleType name="country">
-        <xs:annotation>
-        	<xs:documentation>This type supports the code of countries specified in the list of ISO 3166 Country Codes. </xs:documentation>
-        </xs:annotation>
-        <xs:restriction base="xs:string">
+		<xs:annotation>
+			<xs:documentation>This type supports the code of countries specified in the list of ISO 3166 Country Codes.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
 			<xs:enumeration value="" />
 			<xs:enumeration value="A1">
 				<xs:annotation>
@@ -1867,6 +1817,11 @@
 					<xs:documentation>Suriname</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
+			<xs:enumeration value="SS">
+				<xs:annotation>
+					<xs:documentation>South Sudan</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
 			<xs:enumeration value="ST">
 				<xs:annotation>
 					<xs:documentation>Sao Tome and Principe</xs:documentation>
@@ -2069,11 +2024,10 @@
 			</xs:enumeration>
 		</xs:restriction>
 	</xs:simpleType>
-
 	<xs:simpleType name="state">
-        <xs:annotation>
-        	<xs:documentation>This type supports the two digit codes of the US states and territories. They are enumerated in the XML schema.</xs:documentation>
-        </xs:annotation>
+		<xs:annotation>
+			<xs:documentation>This type supports the two digit codes of the US states and territories. They are enumerated in the XML schema.</xs:documentation>
+		</xs:annotation>
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="" />
 			<xs:enumeration value="AK">
@@ -2348,143 +2302,165 @@
 			</xs:enumeration>
 		</xs:restriction>
 	</xs:simpleType>
-
-	<!-- 
-		Report Responses  
-	-->
+	<!-- Report Responses -->
 	<xs:element name="reportResponse">
-        <xs:annotation>
-        	<xs:documentation>This element is the root element of the response to a report, 
-        		file or file details submittal.
-        	</xs:documentation>
-        </xs:annotation>
+		<xs:annotation>
+			<xs:documentation>This element is the root element of the response to a report, file or file details submittal.</xs:documentation>
+		</xs:annotation>
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element name="responseCode" type="responseCode">
 					<xs:annotation>
-						<xs:documentation>
-							The response code returned from the submittal. 0 is success,
-							any non-zero number is an error code defined in the responseCode section.
-						</xs:documentation>
+						<xs:documentation>The response code returned from the submittal. 0 is success, any non-zero number is an error code defined in the responseCode section.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="responseDescription" type="xs:string">
 					<xs:annotation>
-						<xs:documentation>
-							The description of the error code or empty if the response is success
-						</xs:documentation>
+						<xs:documentation>The description of the error code or empty if the response is success.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="reportId" type="xs:token">
+				<xs:element name="reportId" type="xs:long">
 					<xs:annotation>
-						<xs:documentation>
-							The report ID about which this submittal is related
-						</xs:documentation>
+						<xs:documentation>The report ID about which this submittal is related.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element minOccurs="0" name="fileId" type="xs:token">
 					<xs:annotation>
-						<xs:documentation>
-							If a file was uploaded, the file ID of the file.
-						</xs:documentation>
+						<xs:documentation>If a file was uploaded, the file ID of the file.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element minOccurs="0" name="hash" type="xs:token">
 					<xs:annotation>
-						<xs:documentation>
-							If a file was uploaded, the md5 hash of the file.
-						</xs:documentation>
+						<xs:documentation>If a file was uploaded, the md5 hash of the file.</xs:documentation>
 					</xs:annotation>
-				</xs:element> 
+				</xs:element>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
-	
-	<!--
-		file upload - This is better handled using a standard POST.
-		There are three variables:
-			reportId - the report this file is related to
-			uploadFile - the file being uploaded 
-	 -->
-	 
-	 
-	<!--
-		file details - Once a file is uploaded, details of the file may follow  
-	-->
+	<!-- file upload - This is better handled using a standard POST. There are three variables: reportId - the report this file is related to uploadFile - the file being uploaded -->
+	<!-- file details - Once a file is uploaded, details of the file may follow -->
 	<xs:element name="fileDetails">
 		<xs:annotation>
 			<xs:documentation>The root element of the file details.</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element name="reportId" type="xs:token">
+				<xs:element name="reportId" type="xs:long">
 					<xs:annotation>
-						<xs:documentation>The report this file is related to</xs:documentation>
+						<xs:documentation>The report this file is related to.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="fileId" type="xs:token">
 					<xs:annotation>
-						<xs:documentation>the file this report is related to</xs:documentation>
+						<xs:documentation>The file this report is related to.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="fileName" type="xs:string">
+				<xs:element minOccurs="0" name="fileName" type="xs:string">
 					<xs:annotation>
-						<xs:documentation>The name of the file being uploaded.</xs:documentation>
+						<xs:documentation>The name of the file being reported to NCMEC by the company.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element minOccurs="0" name="originalFileName" type="xs:string">
+					<xs:annotation>
+						<xs:documentation>Original filename associated with the file when it was uploaded to the company’s servers by the reported user or person.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element minOccurs="0" name="locationOfFile" type="xs:anyURI">
 					<xs:annotation>
-						<xs:documentation>the URL where reported file was originally located</xs:documentation>
+						<xs:documentation>The URL where reported file was originally located.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element minOccurs="0" name="fileViewedByEsp" type="xs:boolean">
+					<xs:annotation>
+						<xs:documentation>Has your company viewed the file being reported to NCMEC?</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element minOccurs="0" name="publiclyAvailable" type="xs:boolean">
+					<xs:annotation>
+						<xs:documentation>Was the reported file publicly accessible to online users?</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element minOccurs="0" name="potentialMeme" type="xs:boolean">
+					<xs:annotation>
+						<xs:documentation>Is the file spreading, out of mimicry, outrage or other non-malicious intent? (i.e. viral)</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element minOccurs="0" name="industryClassification" type="fileClassification">
+					<xs:annotation>
+						<xs:documentation>This field should be used only if your company has executed the MOU to participate in the Industry Hash Sharing Platform. Only populate with Industry-created classification scale (A1, A2, B1, or B2).</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element minOccurs="0" maxOccurs="unbounded" name="originalFileHash" type="hash">
+					<xs:annotation>
+						<xs:documentation>The original binary hash value of the file at the time it was uploaded by the reported user or person (prior to any potential modification by your company). Include required attribute hashType, specifying the type of hash submitted, e.g., MD5, SHA1, etc.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element minOccurs="0" name="ipCaptureEvent" type="ipCaptureEvent">
 					<xs:annotation>
-						<xs:documentation>This represents the upload IP address of the file
-						and when it occurred.</xs:documentation>
+						<xs:documentation>This represents the upload IP address of the file and when it occurred.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element minOccurs="0" maxOccurs="unbounded" ref="details"/>
+				<xs:element minOccurs="0" maxOccurs="unbounded" name="deviceId" type="deviceId" >
+					<xs:annotation>
+						<xs:documentation>An ID for a device used to upload the file and, optionally, when it was used.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element minOccurs="0" maxOccurs="unbounded" ref="details" />
 				<xs:element minOccurs="0" ref="additionalInfo">
 					<xs:annotation>
-						<xs:documentation>Any additional information about the file (i.e., 
-						associated comments, captions, etc.)
-						</xs:documentation>
+						<xs:documentation>Additional information regarding the uploaded file your company wishes to report (e.g., "viral video").</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
 	<xs:element name="details">
-        <xs:annotation>
-        	<xs:documentation>All the file meta data name value pairs.</xs:documentation>
-        </xs:annotation>
+		<xs:annotation>
+			<xs:documentation>All the file meta data name value pairs.</xs:documentation>
+		</xs:annotation>
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element name="nameValuePair" minOccurs="1" maxOccurs="unbounded" type="nameValue" >
+				<xs:element name="nameValuePair" minOccurs="1" maxOccurs="unbounded" type="nameValue">
 					<xs:annotation>
-						<xs:documentation>The list of meta data</xs:documentation>
+						<xs:documentation>The list of meta data.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 			</xs:sequence>
 			<xs:attribute name="type" type="metadataTypes">
 				<xs:annotation>
-					<xs:documentation>The type of meta data being sent</xs:documentation>
+					<xs:documentation>The type of meta data being sent.</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
 		</xs:complexType>
 	</xs:element>
-
 	<xs:simpleType name="metadataTypes">
-	    <xs:restriction base="xs:string">
+		<xs:restriction base="xs:string">
 			<xs:enumeration value="EXIF" />
 			<xs:enumeration value="HASH" />
-    	</xs:restriction>
+		</xs:restriction>
 	</xs:simpleType>
-	
+	<xs:simpleType name="fileClassification">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="A1" />
+			<xs:enumeration value="A2" />
+			<xs:enumeration value="B1" />
+			<xs:enumeration value="B2" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="hash">
+		<xs:annotation>
+			<xs:documentation>The complex type hash contains a hash and hash type.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute use="required" name="hashType" type="xs:string" />
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
 	<xs:simpleType name="responseCode">
-        <xs:annotation>
-        	<xs:documentation>For every submittal, there is a response code</xs:documentation>
-        </xs:annotation>
+		<xs:annotation>
+			<xs:documentation>For every submittal, there is a response code.</xs:documentation>
+		</xs:annotation>
 		<xs:restriction base="xs:int">
 			<xs:enumeration value="0">
 				<xs:annotation>
@@ -2608,47 +2584,40 @@
 			</xs:enumeration>
 		</xs:restriction>
 	</xs:simpleType>
-	
 	<xs:complexType name="nameValue">
 		<xs:sequence>
-			<xs:element name="name" type="xs:string" >
+			<xs:element name="name" type="xs:string">
 				<xs:annotation>
 					<xs:documentation>The name of the meta data variable.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="value" type="xs:string" >
+			<xs:element name="value" type="xs:string">
 				<xs:annotation>
 					<xs:documentation>The value of the meta data variable.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	
-	<!-- The final response from the server  -->
+	<!-- The final response from the server -->
 	<xs:element name="reportDoneResponse">
 		<xs:annotation>
-			<xs:documentation>The final response from the server once the report has been submitted, 
-				all files and file details have been uploaded and the report done has been submitted.
-			</xs:documentation>
+			<xs:documentation>The final response from the server once the report has been submitted, all files and file details have been uploaded and the report done has been submitted.</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element name="responseCode" type="responseCode">
 					<xs:annotation>
-						<xs:documentation>
-							The response code returned from the submittal. 0 is success,
-							any non-zero number is an error code defined in the responseCode section.
-						</xs:documentation>
+						<xs:documentation>The response code returned from the submittal. 0 is success, any non-zero number is an error code defined in the responseCode section.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="reportId" type="xs:string"/>
+				<xs:element name="reportId" type="xs:long" />
 				<xs:element name="files">
 					<xs:annotation>
-						<xs:documentation>The list of files successfully uploaded</xs:documentation>
+						<xs:documentation>The list of files successfully uploaded.</xs:documentation>
 					</xs:annotation>
 					<xs:complexType>
 						<xs:sequence>
-							<xs:element minOccurs="0" maxOccurs="unbounded" name="fileId" type="xs:string"/>
+							<xs:element minOccurs="0" maxOccurs="unbounded" name="fileId" type="xs:string" />
 						</xs:sequence>
 					</xs:complexType>
 				</xs:element>
