@@ -13,12 +13,13 @@ NCMEC reporting form for Child Protection takedowns
 ---------------------------------------------   */
 
 require_once dirname( __FILE__ ) . '/../core-include/multiuseFunctions.php';
+require_once dirname( __FILE__ ) . '/../project-include/ncmec.class.php';
 date_default_timezone_set( 'UTC' );
 
 // cast config and log variables
 $config = parse_ini_file( dirname( __FILE__ ) . '/../lcaToolsConfig.ini' );
 $user = $_SERVER['PHP_AUTH_USER'];
-
+$ncmec = new ncmec( $config );
 
 ?>
 
@@ -78,18 +79,13 @@ $user = $_SERVER['PHP_AUTH_USER'];
 					<legend> Processing </legend>
 					<textarea name='reportxml' wrap='virtual' rows='18' cols='70'><?php if ( !empty( $_POST['reportid'] ) ) {
 	$wastest = $_POST['wastest'];
-	if ( $wastest === 'N' ) {
-		$NCMECurl = $config['NCMEC_URL_Production'];
-		$ncusername = $config['NCMEC_user_prod'];
-		$ncpassword = $config['NCMEC_password_prod'];
-	} else {
-		$NCMECurl = $config['NCMEC_URL_Test'];
-		$ncusername = $config['NCMEC_user_test'];
-		$ncpassword = $config['NCMEC_password_test'];
-	}
 	echo 'Report ID: '.$_POST['reportid'].' detected for retraction'.PHP_EOL.PHP_EOL;
-	$postdata = array( 'id'=>$_POST['reportid'] );
-	$result = NCMECsimpleauthdcurlPost( $ncusername, $ncpassword, $NCMECurl, $postdata );
+	if ( $wastest === 'N' ) {
+		$result = $ncmec->retractreport( $_POST['reportid'] );
+	} else {
+		$result = $ncmec->retractreport( $_POST['reportid'], 'test' );
+	}
+
 	echo $result; } else {echo 'No reportID detected in post';}
 ?></textarea>
 				</fieldset>
