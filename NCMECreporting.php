@@ -298,14 +298,6 @@
                                     <input id='reporter-email' name='reporter-email' type='text' size='50' value=<?php echo "'".$_SERVER['PHP_AUTH_USER']."@wikimedia.org'";?> required email/> <img class='showTooltip' src='/images/20px-Help.png' title='YOUR email as the reporter, defaults to username logged in.' />
                                 </td>
                             </tr>
-                        <!--<tr>
-                                <td>
-                                    <label for='reporter-phone'> Phone number (xxx-xxx-xxx) <br /> and extension (xxxx) if necessary: </label>
-                                </td>
-                                <td>
-                                    <input id='reporter-phone' name='reporter-phone' type='text' size='20' value='415-839-6885' /> <input id='reporter-phone-ext' name='reporter-phone-ext' type='text' size='5' /> <img class='showTooltip' src='/images/20px-Help.png' title='Phone number for followup, defaults to office with no extension' />
-                                </td>
-                            </tr> REMOVED FOR NOW BECAUSE OF CONTACT INFO BEING SENT ELSEWHERE-->
                         </table>
                     </fieldset>
                     <fieldset>
