@@ -336,7 +336,7 @@
                                         <option value='Wiktionary'> Wiktionary </option>
                                         <option value='Wikisource'> Wikisource </option>
                                         <option value='Wikiversity'> Wikiversity</option>
-                                    </select> <img class='showTooltip' src='/images/20px-Help.png' title='The project where the image was uploaded (usually Commons). [note: Non Commons sites not YET implemented]' />
+                                    </select> <img class='showTooltip' src='/images/20px-Help.png' title='The project where the image was uploaded (usually Commons)./>
                                 </td>
                             </tr>
                             <tr>
