@@ -325,7 +325,7 @@
                                 </td>
                                 <td>
                                     <select id='project' name='project' required>
-                                        <option value='Wikimedia Commons' selected>Wikimedia Commons </option>
+                                        <option value='Commons' selected>Wikimedia Commons </option>
                                         <option value='Wikipedia'> Wikipedia </option>
                                         <option value='Wikidata'> Wikidata </option>
                                         <option value='Wikibooks'> Wikibooks </option>
