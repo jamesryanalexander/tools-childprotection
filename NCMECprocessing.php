@@ -14,6 +14,9 @@ New processor with pretty output - Beta
 ---------------------------------------------   */
 
 require_once dirname( __FILE__ ) . '/../core-include/multiuseFunctions.php';
+require_once dirname( __FILE__ ) . '/../project-include/ncmec.class.php';
+require_once dirname( __FILE__ ) . '/../project-include/lcatools.class.php';
+
 date_default_timezone_set( 'UTC' );
 
 // cast config and log variables
@@ -47,16 +50,17 @@ $reporteremail = $_POST['reporter-email'];
 
 $incfilename = $_POST['file-name'];
 
-// FIXME ASSUMPTION: setup url, for now just assuming commons (bad but works for now)
-$incurl = 'https://commons.wikimedia.org/wiki/File:'.$incfilename;
-
 $incproject = $_POST['project'];
 $incprojectlang = $_POST['project-language'];
 
+
+
 if ( !empty( $incprojectlang ) ) {
 	$incprojectcombined = $incprojectlang.".".$incproject;
+	$incurl = lcatools::wmfurl( $incproject, $incprojectlang, 'File:'.$incfilename );
 } else {
 	$incprojectcombined = null;
+	$incurl = lcatools::wmfurl( $incproject, null, 'File:'.$incfilename );
 }
 
 $incdate = $_POST['incident-date'];
