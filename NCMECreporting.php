@@ -85,6 +85,23 @@
         }
     });
 
+    var filewrapper = $("#fileset");
+    //messy but seems easiest for now
+    var hourSelectjs = "<option value='00'>00</option><option value='01'>01</option> <option value='02'>02</option> <option value='03'>03</option> <option value='04'>04</option> <option value='05'>05</option> <option value='06'>06</option> <option value='07'>07</option> <option value='08'>08</option> <option value='09'>09</option> <option value='10'>10</option> <option value='11'>11</option> <option value='12'>12</option><option value='13'>13</option><option value='14'>14</option><option value='15'>15</option><option value='16'>16</option><option value='17'>17</option><option value='18'>18</option><option value='19'>19</option><option value='20'>20</option><option value='21'>21</option><option value='22'>22</option><option value='23'>23</option>"
+    var minuteSelectjs = "<option value='00'>00</option><option value='01'>01</option><option value='02'>02</option><option value='03'>03</option><option value='04'>04</option><option value='05'>05</option><option value='06'>06</option><option value='07'>07</option><option value='08'>08</option><option value='09'>09</option><option value='10'>10</option><option value='11'>11</option><option value='12'>12</option><option value='13'>13</option><option value='14'>14</option><option value='15'>15</option><option value='16'>16</option><option value='17'>17</option><option value='18'>18</option><option value='19'>19</option><option value='20'>20</option><option value='21'>21</option><option value='22'>22</option><option value='23'>23</option><option value='24'>24</option><option value='25'>25</option><option value='26'>26</option><option value='27'>27</option><option value='28'>28</option><option value='29'>29</option><option value='30'>30</option><option value='31'>31</option><option value='32'>32</option><option value='33'>33</option><option value='34'>34</option><option value='35'>35</option><option value='36'>36</option><option value='37'>37</option><option value='38'>38</option><option value='39'>39</option><option value='40'>40</option><option value='41'>41</option><option value='42'>42</option><option value='43'>43</option><option value='44'>44</option><option value='45'>45</option><option value='46'>46</option><option value='47'>47</option><option value='48'>48</option><option value='49'>49</option><option value='50'>50</option><option value='51'>51</option><option value='52'>52</option><option value='53'>53</option><option value='54'>54</option><option value='55'>55</option><option value='56'>56</option><option value='57'>57</option><option value='58'>58</option><option value='59'>59</option>"
+    var fileadder = $("#addmorefiles");
+    var fileremover = $("#removefiles"); //for now only having one remover and just sorta dealing with the consequnces.
+    var filenum = 1;
+
+    $(fileadder).click(function (e)
+    {
+
+        $(filewrapper).append("<fieldset id='file" + (filenum + 1) + "'> <legend> File #" + (filenum + 1) + " </legend> <table border='0' id='mw-movepage-table'> <tr> <td> <label for='files[" + filenum + "][file-name]'> File name (without File:) </label> </td> <td> File:<input id='files[" + filenum + "][file-name]' name='files[" + filenum + "][file-name]' value='' type='text' size='50' required /> </td> </tr> <tr> <td> <label for='files[" + filenum + "][incident-date]'>Date and time of upload: </label> </td> <td> <input id='files[" + filenum + "][incident-date]' name='files[" + filenum + "][incident-date]' value='' type='text' size='15' required/> <select id='files[" + filenum + "][incident-time-hour]' name='files[" + filenum + "][incident-time-hour]' required> " + hourSelectjs + " </select> <select id='files[" + filenum + "][incident-time-min]' name='files[" + filenum + "][incident-time-min]' required> " + minuteSelectjs + " </select> <img class='showTooltip' src='/images/20px-Help.png' title='Date and time of the image upload, please use the date picker or the format YYYY-MM-DD' /> </td> </tr> <tr> <td> <label for='files[" + filenum + "][ip]'> IP used for upload: </label> </td> <td> <input type='text' size='25' name='files[" + filenum + "][ip]' id='files[" + filenum + "][ip]'/> </td> </tr> <tr> <td> <label for='files[" + filenum + "][file]'> Image taken down: </label> </td> <td> <input name='files[" + filenum + "][file]' type='file' required/> </td> </tr> </table> </fieldset>");
+
+        filenum++;
+
+    });
+
 
 });
 
@@ -193,90 +210,10 @@
                                 <td>
                                     <input id='access-date' name='access-date' value='' type='text' size='15' required/>
                                     <select id='access-time-hour' name='access-time-hour' required>
-                                        <option value='01'>01</option>
-                                        <option value='02'>02</option>
-                                        <option value='03'>03</option>
-                                        <option value='04'>04</option>
-                                        <option value='05'>05</option>
-                                        <option value='06'>06</option>
-                                        <option value='07'>07</option>
-                                        <option value='08'>08</option>
-                                        <option value='09'>09</option>
-                                        <option value='10'>10</option>
-                                        <option value='11'>11</option>
-                                        <option value='12'>12</option>
-                                        <option value='13'>13</option>
-                                        <option value='14'>14</option>
-                                        <option value='15'>15</option>
-                                        <option value='16'>16</option>
-                                        <option value='17'>17</option>
-                                        <option value='18'>18</option>
-                                        <option value='19'>19</option>
-                                        <option value='20'>20</option>
-                                        <option value='21'>21</option>
-                                        <option value='22'>22</option>
-                                        <option value='23'>23</option>
+                                        <?php include dirname( __FILE__ ) . '/../core-include/hourSelect.php'; ?>
                                     </select>
                                     <select id='access-time-min' name='access-time-min' required>
-                                        <option value='01'>01</option>
-                                        <option value='02'>02</option>
-                                        <option value='03'>03</option>
-                                        <option value='04'>04</option>
-                                        <option value='05'>05</option>
-                                        <option value='06'>06</option>
-                                        <option value='07'>07</option>
-                                        <option value='08'>08</option>
-                                        <option value='09'>09</option>
-                                        <option value='10'>10</option>
-                                        <option value='11'>11</option>
-                                        <option value='12'>12</option>
-                                        <option value='13'>13</option>
-                                        <option value='14'>14</option>
-                                        <option value='15'>15</option>
-                                        <option value='16'>16</option>
-                                        <option value='17'>17</option>
-                                        <option value='18'>18</option>
-                                        <option value='19'>19</option>
-                                        <option value='20'>20</option>
-                                        <option value='21'>21</option>
-                                        <option value='22'>24</option>
-                                        <option value='23'>23</option>
-                                        <option value='24'>24</option>
-                                        <option value='25'>25</option>
-                                        <option value='26'>26</option>
-                                        <option value='27'>27</option>
-                                        <option value='28'>28</option>
-                                        <option value='29'>29</option>
-                                        <option value='30'>30</option>
-                                        <option value='31'>31</option>
-                                        <option value='32'>32</option>
-                                        <option value='33'>33</option>
-                                        <option value='34'>34</option>
-                                        <option value='35'>35</option>
-                                        <option value='36'>36</option>
-                                        <option value='37'>37</option>
-                                        <option value='38'>38</option>
-                                        <option value='39'>39</option>
-                                        <option value='40'>40</option>
-                                        <option value='41'>41</option>
-                                        <option value='42'>42</option>
-                                        <option value='43'>43</option>
-                                        <option value='44'>44</option>
-                                        <option value='45'>45</option>
-                                        <option value='46'>46</option>
-                                        <option value='47'>47</option>
-                                        <option value='48'>48</option>
-                                        <option value='49'>49</option>
-                                        <option value='50'>50</option>
-                                        <option value='51'>51</option>
-                                        <option value='52'>52</option>
-                                        <option value='53'>53</option>
-                                        <option value='54'>54</option>
-                                        <option value='55'>55</option>
-                                        <option value='56'>56</option>
-                                        <option value='57'>57</option>
-                                        <option value='58'>58</option>
-                                        <option value='59'>59</option>
+                                        <?php include dirname( __FILE__ ) . '/../core-include/minuteSelect.php'; ?>
                                     </select>
                                     <img class='showTooltip' src='/images/20px-Help.png' title='All date/times UTC. Please use date selector or format as YYYY-MM-DD for first box. This should be the time and date that YOU (the reporter) accessed the file.
                                     It is preset to the report time as a rough guess given WMF standard process however if you are filling this out much later you should adjust it.' />
@@ -303,14 +240,6 @@
                     <fieldset>
                         <legend> Incident Information</legend>
                         <table border='0' id='mw-movepage-table'>
-                            <tr>
-                                <td>
-                                    <label for='file-name'> File name (without File:) </label>
-                                </td>
-                                <td>
-                                    File:<input id='file-name' name='file-name' value='' type='text' size='50' required />
-                                </td>
-                            </tr>
                             <tr>
                                 <td>
                                     <label for='project'> Project where file was uploaded </label>
@@ -341,107 +270,12 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <label for='incident-date'>Date and time of upload: </label>
-                                </td>
-                                <td>
-                                    <input id='incident-date' name='incident-date' value='' type='text' size='15' required/>
-                                    <select id='incident-time-hour' name='incident-time-hour' required>
-                                        <option value='01'>01</option>
-                                        <option value='02'>02</option>
-                                        <option value='03'>03</option>
-                                        <option value='04'>04</option>
-                                        <option value='05'>05</option>
-                                        <option value='06'>06</option>
-                                        <option value='07'>07</option>
-                                        <option value='08'>08</option>
-                                        <option value='09'>09</option>
-                                        <option value='10'>10</option>
-                                        <option value='11'>11</option>
-                                        <option value='12'>12</option>
-                                        <option value='13'>13</option>
-                                        <option value='14'>14</option>
-                                        <option value='15'>15</option>
-                                        <option value='16'>16</option>
-                                        <option value='17'>17</option>
-                                        <option value='18'>18</option>
-                                        <option value='19'>19</option>
-                                        <option value='20'>20</option>
-                                        <option value='21'>21</option>
-                                        <option value='22'>24</option>
-                                        <option value='23'>23</option>
-                                    </select>
-                                    <select id='incident-time-min' name='incident-time-min' required>
-                                        <option value='01'>01</option>
-                                        <option value='02'>02</option>
-                                        <option value='03'>03</option>
-                                        <option value='04'>04</option>
-                                        <option value='05'>05</option>
-                                        <option value='06'>06</option>
-                                        <option value='07'>07</option>
-                                        <option value='08'>08</option>
-                                        <option value='09'>09</option>
-                                        <option value='10'>10</option>
-                                        <option value='11'>11</option>
-                                        <option value='12'>12</option>
-                                        <option value='13'>13</option>
-                                        <option value='14'>14</option>
-                                        <option value='15'>15</option>
-                                        <option value='16'>16</option>
-                                        <option value='17'>17</option>
-                                        <option value='18'>18</option>
-                                        <option value='19'>19</option>
-                                        <option value='20'>20</option>
-                                        <option value='21'>21</option>
-                                        <option value='22'>24</option>
-                                        <option value='23'>23</option>
-                                        <option value='24'>24</option>
-                                        <option value='25'>25</option>
-                                        <option value='26'>26</option>
-                                        <option value='27'>27</option>
-                                        <option value='28'>28</option>
-                                        <option value='29'>29</option>
-                                        <option value='30'>30</option>
-                                        <option value='31'>31</option>
-                                        <option value='32'>32</option>
-                                        <option value='33'>33</option>
-                                        <option value='34'>34</option>
-                                        <option value='35'>35</option>
-                                        <option value='36'>36</option>
-                                        <option value='37'>37</option>
-                                        <option value='38'>38</option>
-                                        <option value='39'>39</option>
-                                        <option value='40'>40</option>
-                                        <option value='41'>41</option>
-                                        <option value='42'>42</option>
-                                        <option value='43'>43</option>
-                                        <option value='44'>44</option>
-                                        <option value='45'>45</option>
-                                        <option value='46'>46</option>
-                                        <option value='47'>47</option>
-                                        <option value='48'>48</option>
-                                        <option value='49'>49</option>
-                                        <option value='50'>50</option>
-                                        <option value='51'>51</option>
-                                        <option value='52'>52</option>
-                                        <option value='53'>53</option>
-                                        <option value='54'>54</option>
-                                        <option value='55'>55</option>
-                                        <option value='56'>56</option>
-                                        <option value='57'>57</option>
-                                        <option value='58'>58</option>
-                                        <option value='59'>59</option>
-                                    </select>
-                                    <img class='showTooltip' src='/images/20px-Help.png' title='Date and time of the image upload, please use the date picker or the format YYYY-MM-DD' />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
                                     <label for='incident-location'> Incident location: </label>
                                 </td>
                                 <td>
                                     <select name='incident-location' id='incident-location'>
                                         <option value='webPageIncident' selected>Web Page </option>
-                                    </select> <img class='showTooltip' src='/images/20px-Help.png' title='Where the incident happened (web page/IRC/email etc) currently only supporting web page.' />
+                                    </select> <img class='showTooltip' src='/images/20px-Help.png' title='Where the incident happened (web page/IRC/email etc) currently only supporting web page. If we need to report something else then we need to do so manually for now' />
                                 </td>
                             </tr>
                             <tr>
@@ -452,12 +286,6 @@
                                     User:<input type='text' size='50' name='uploader-username' id='uploader-username' required/>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>
-                                    <label for='uploader-ip'> IP used for upload: </label>
-                                </td>
-                                <td>
-                                    <input type='text' size='25' name='uploader-ip' id='uploader-ip'/>
                             <tr>
                                 <td>
                                     <label for='uploader-email'> Email of uploader: </label>
@@ -472,10 +300,55 @@
                         <legend> Additional Information (CU data, other info we may have etc) </legend>
                         <textarea name='comments' wrap='virtual' rows='18' cols='70'></textarea>
                     </fieldset>
-                    <fieldset>
-                        <legend> The file </legend>
-                        <input type='hidden' name='MAX_FILE_SIZE' value='52428800' />
-                        <p> Image taken down <input name='takedown-file1' type='file' required/></p>
+                    <fieldset id='fileset'>
+                    <input type='hidden' name='MAX_FILE_SIZE' value='52428800' />
+                        <legend> The file(s) </legend>
+                        <img id='addmorefiles' src='/images/List-add.svg' width='20px' title='add a file field'/>
+                        <fieldset id='file1'>
+                            <legend> File #1 </legend>
+                            <table border='0' id='mw-movepage-table'>
+                        <tr>
+                            <td>
+                                <label for='files[0][file-name]'> File name (without File:) </label>
+                            </td>
+                            <td>
+                                File:<input id='files[0][file-name]' name='files[0][file-name]' value='' type='text' size='50' required />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for='files[0][incident-date]'>Date and time of upload: </label>
+                            </td>
+                            <td>
+                                <input id='files[0][incident-date]' name='files[0][incident-date]' value='' type='text' size='15' required/>
+                                <select id='files[0][incident-time-hour]' name='files[0][incident-time-hour]' required>
+                                   <?php include dirname( __FILE__ ) . '/../core-include/hourSelect.php'; ?>
+                                </select>
+                                <select id='files[0][incident-time-min]' name='files[0][incident-time-min]' required>
+                                    <?php include dirname( __FILE__ ) . '/../core-include/minuteSelect.php'; ?>
+                                </select>
+                                <img class='showTooltip' src='/images/20px-Help.png' title='Date and time of the image upload, please use the date picker or the format YYYY-MM-DD' />
+                            </td>
+                        </tr>
+                         <tr>
+                            <td>
+                                <label for='files[0][ip]'> IP used for upload: </label>
+                            </td>
+                            <td>
+                                <input type='text' size='25' name='files[0][ip]' id='files[0][ip]'/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for='files[0][file]'> Image taken down: </label> 
+
+                            </td>
+                            <td>
+                                <input name='files[0][file]' type='file' required/>
+                            </td>
+                        </tr>
+                        </table>
+                        </fieldset>
                         <input type='submit' value='Process takedown and send to NCMEC'>
                     </fieldset>
                 </form>
