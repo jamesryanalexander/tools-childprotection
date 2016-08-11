@@ -96,9 +96,29 @@
     $(fileadder).click(function (e)
     {
 
-        $(filewrapper).append("<fieldset id='file" + (filenum + 1) + "'> <legend> File #" + (filenum + 1) + " </legend> <table border='0' id='mw-movepage-table'> <tr> <td> <label for='files[" + filenum + "][file-name]'> File name (without File:) </label> </td> <td> File:<input id='files[" + filenum + "][file-name]' name='files[" + filenum + "][file-name]' value='' type='text' size='50' required /> </td> </tr> <tr> <td> <label for='files[" + filenum + "][incident-date]'>Date and time of upload: </label> </td> <td> <input id='files[" + filenum + "][incident-date]' name='files[" + filenum + "][incident-date]' value='' type='text' size='15' required/> <select id='files[" + filenum + "][incident-time-hour]' name='files[" + filenum + "][incident-time-hour]' required> " + hourSelectjs + " </select> <select id='files[" + filenum + "][incident-time-min]' name='files[" + filenum + "][incident-time-min]' required> " + minuteSelectjs + " </select> <img class='showTooltip' src='/images/20px-Help.png' title='Date and time of the image upload, please use the date picker or the format YYYY-MM-DD' /> </td> </tr> <tr> <td> <label for='files[" + filenum + "][ip]'> IP used for upload: </label> </td> <td> <input type='text' size='25' name='files[" + filenum + "][ip]' id='files[" + filenum + "][ip]'/> </td> </tr> <tr> <td> <label for='files[" + filenum + "][file]'> Image taken down: </label> </td> <td> <input name='files[" + filenum + "][file]' type='file' required/> </td> </tr> </table> </fieldset>");
+        $(filewrapper).append("<fieldset id='file" + filenum + "'> <legend> File #" + (filenum + 1) + " </legend> <table border='0' id='mw-movepage-table'> <tr> <td> <label for='files[" + filenum + "][file-name]'> File name (without File:) </label> </td> <td> File:<input id='files[" + filenum + "][file-name]' name='files[" + filenum + "][file-name]' value='' type='text' size='50' required /> </td> </tr> <tr> <td> <label for='files[" + filenum + "][incident-date]'>Date and time of upload: </label> </td> <td> <input id='files[" + filenum + "][incident-date]' name='files[" + filenum + "][incident-date]' value='' type='text' size='15' required/> <select id='files[" + filenum + "][incident-time-hour]' name='files[" + filenum + "][incident-time-hour]' required> " + hourSelectjs + " </select> <select id='files[" + filenum + "][incident-time-min]' name='files[" + filenum + "][incident-time-min]' required> " + minuteSelectjs + " </select> <img class='showTooltip' src='/images/20px-Help.png' title='Date and time of the image upload, please use the date picker or the format YYYY-MM-DD' /> </td> </tr> <tr> <td> <label for='files[" + filenum + "][ip]'> IP used for upload: </label> </td> <td> <input type='text' size='25' name='files[" + filenum + "][ip]' id='files[" + filenum + "][ip]'/> </td> </tr> <tr> <td> <label for='files[" + filenum + "][file]'> Image taken down: </label> </td> <td> <input name='files[" + filenum + "][file]' type='file' required/> </td> </tr> </table> </fieldset>");
 
         filenum++;
+
+        $('#totalfiles').val(filenum);
+
+    });
+
+    $(fileremover).click(function (e)
+    {
+
+        if ( filenum > 1 ) {
+
+            var lastSet = '#file' + (filenum - 1);
+
+            $(lastSet).remove();
+
+            filenum--;
+            $('#totalfiles').val(filenum);
+
+        } else {
+
+        }
 
     });
 
@@ -301,10 +321,12 @@
                         <textarea name='comments' wrap='virtual' rows='18' cols='70'></textarea>
                     </fieldset>
                     <fieldset id='fileset'>
+                    <input type='hidden' id='totalfiles' name='files[total]' value='1' />
                     <input type='hidden' name='MAX_FILE_SIZE' value='52428800' />
                         <legend> The file(s) </legend>
                         <img id='addmorefiles' src='/images/List-add.svg' width='20px' title='add a file field'/>
-                        <fieldset id='file1'>
+                        <img id='removefiles' src='/images/List-remove.svg' width='20px' title='remove a file field'/>
+                        <fieldset id='file0'>
                             <legend> File #1 </legend>
                             <table border='0' id='mw-movepage-table'>
                         <tr>
